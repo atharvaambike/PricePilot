@@ -1,0 +1,105 @@
+ body {
+  font-family: "Poppins", sans-serif;
+  color: #555555;
+  padding:0;
+  margin:0;
+}
+
+.nav-div{
+  width:100%;
+  background-color:#fff;
+  position:fixed;
+  top:0;
+}
+
+.navbar{
+  position:fixed;
+  top:0;
+  z-index:1;
+}
+.nav-logo-img{
+  width:50px;
+  height:50px;
+  border-radius:100%;
+}
+.nav-title-div{
+  width:100%;
+  background-color: #555555;
+  margin-top:50px;
+  margin-bottom:50px;
+  text-align: center;
+  
+}
+.cardd{
+  width:600px;
+
+}
+.loadingGif{
+  height:100px;
+  width:200px;
+}
+
+.form-group{
+  text-align: center;
+}
+.nav-title{
+  color:#FFD93D;
+  width:500px;
+  height:100px;
+  margin:auto;
+  line-height:50px;
+}
+.nav-link{
+  margin:8px;
+}
+.navbar-brand{
+  margin-left:25px;
+}
+.results-div{
+  margin-top:50px;
+}
+.pricegif-div{
+  margin-top:80px;
+  text-align: center;
+  width:100%;
+}
+.pricegif{
+  width:300px;
+}
+
+/*Carousel section*/
+#carouselExampleIndicators{
+ width:70%;
+ height:400px;
+ margin:50px auto;
+ border:solid 2px black;
+ 
+}
+
+.carousel-item{
+  text-align: center;
+}
+.carousel-img{
+  width:300px;
+  height:300px;
+}
+.sr-only{
+  color:black;
+}
+/*Features-sections*/
+.features-container{
+  display:flex;
+}
+
+
+/*Footer section*/
+.footer-div{
+  width:100%;
+  background-color: #555555;
+  text-align: center;
+} 
+a:hover{
+  transform:scale(1.2);
+  transition:all 0.5s ease-in-out;
+  
+}

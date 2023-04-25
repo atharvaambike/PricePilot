@@ -1,0 +1,351 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<head>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<link rel="stylesheet"src="myapp/static/assets/css/style.css">
+</head> 
+<style>
+ 
+  .btn {
+  background: #000000;
+  background-image: -webkit-linear-gradient(top, #000000, #ffd519);
+  background-image: -moz-linear-gradient(top, #000000, #ffd519);
+  background-image: -ms-linear-gradient(top, #000000, #ffd519);
+  background-image: -o-linear-gradient(top, #000000, #ffd519);
+  background-image: linear-gradient(to bottom, #000000, #ffd519);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #ffd000;
+  background-image: -webkit-linear-gradient(top, #ffd000, #050505);
+  background-image: -moz-linear-gradient(top, #ffd000, #050505);
+  background-image: -ms-linear-gradient(top, #ffd000, #050505);
+  background-image: -o-linear-gradient(top, #ffd000, #050505);
+  background-image: linear-gradient(to bottom, #ffd000, #050505);
+  text-decoration: none;
+}
+.loadingGif{
+  height:100px;
+  width:200px;
+  margin:0 auto;
+  display:none;
+}
+.hide{
+  display:none;
+}
+/*Price css*/
+.price{
+  color:black;
+  margin:0 15px;
+  font-weight: bold;
+  font:60px;
+}
+a{
+  text-decoration:none;
+}
+/*img-thubanil css*/
+.img-thumbnail{
+  margin-right:2px;
+}
+.link-name{
+  color:#000000;
+  border:solid 5px #E3DFFD;
+}
+.card-title{
+  margin:5px;
+}
+.resultsobtained{
+  width:600px;
+  margin:20px auto;
+}
+.cardd{
+  width:600px;
+}
+.row{
+  text-align: center;
+}
+.cardd:hover{
+  transform:scale(1.1);
+  transition:all 0.5s ease-in-out;
+  
+}
+</style>
+
+<section>
+    <div class="nav-div" id="navdivid">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbarid">
+        <a class="navbar-brand" href="#"><span><img class="nav-logo-img" src="/media/website-logo.jpg"></span>PricePilot</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#features-section">Features</a>
+            </li>
+           
+          </ul>
+        </div>
+      </nav>
+    </div>
+   
+</section>
+<div class="pricegif-div">
+ <img class="pricegif" src="/media/shoppingcartgif.gif">
+ <img class="pricegif" src="/media/pricegif.gif">
+ <img class="pricegif" src="/media/shoppingcartgif.gif">
+</div>
+ <div class="nav-title-div">
+      <h1 class="nav-title">Your Ultimate Shopping<span style="text-align: center;display:block;">Comparison</span> </h1>
+ </div>
+<section class="">
+ 
+  
+    <div class="container" id="searchProduct">
+      
+    <!-- <h3>Search Product</h3> -->
+        <div class="form">
+            <form class="form-a" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+               
+                
+                    <div class="form-group">
+                    <!-- <label class="pb-2" for="Type">Search(with name)</label> -->
+                    <input style="width:600px; display:inline;" type="text" class="form-control form-control-a" placeholder="Don't wait, Search Now" value="{{request.POST.search}}" name="search">
+                    <button class="btn" id="searchButton" style="display:inline; margin:5px;" type="submit" class="btn btn-primary" onclick="appearLoadingGif()">search</button>
+                    </div>
+                   
+              
+                   
+              
+            </form>
+        </div>
+    
+        <img class="loadingGif" id="loadingGifid" src="/media/loadinggif.gif">
+      
+      
+        <div class="form ">
+    <section class="section-property">
+        <div class="container">
+          <div id="property-carousel" class="">
+            <div class="row">
+
+              {% for i in data %}
+              <div class="resultsobtained">
+                <div class="{% if forloop.counter > 1 %}col-half-offset{% endif %} cardd" id="card-id">
+                
+                 
+                    <div class="{% if forloop.counter == 1 %}  {% endif %}">
+                      <!-- {% if forloop.counter == 1 %}
+                        <div class="ribbon">
+                          <span>lowest!</span>
+                        </div>
+                      {% endif %} -->
+                      <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal-{{forloop.counter}}" style="width:400px">
+                        <img src="{{i.image}}" alt="page-not-found" class="img-thumbnail" style="width:400px;height:180px;">
+                      </button>
+                    </div>
+                
+                  <div class="">
+                      <div class="">
+                        <div class="card-header" style="height:180px">
+                          <h6 style="margin:10px 0;" class="card-title">
+                            <a class="link-name" href="">
+                              {{i.name}}
+                            </a>
+                          </h6>
+                          <div class="price-box mb-3">
+                             
+                          </div>
+                          <div>
+  
+                            <img src="{{i.logo}}" style="width:200px;height:40px;"/>
+                          <a href="{{i.link}}" target="_blank">
+                            <span class="price" > ₹  <span id="price-tag" class="price-tag-class">{{i.price}}</span></span>
+                            <button class="price-box btn btn-primary">Buy Now</button>
+                          </a>
+                          </div>
+                         
+  
+                          
+                          
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                {% endfor %}
+              </div>
+            
+
+              
+
+
+              
+            </div>
+          </div>
+          {% for i in data %}
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal-{{forloop.counter}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">{{i.name}}</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{{i.image}}" alt="" class="img-thumbnail" style="width:100%">
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+          <div class="propery-carousel-pagination carousel-pagination"></div>
+  
+        </div>
+      </section><!-- End Latest Properties Section -->
+        </div>
+</div>
+
+<h1 style="margin:20px;">Our Features</h1>
+<hr>
+<!--Carousel(Features) section-->
+<section id="features-section">
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <h1>PRICE COMPARISON</h1>
+        <p>compare price of products from different E-commerce websites</p>
+        <img class="carousel-img" src="/media/comparegif.gif" alt="First slide">
+      </div>
+      <div class="carousel-item">
+        <h1>No Need To Create Account</h1>
+        <p>Fast and easy to use</p>
+        <img class="carousel-img" src="/media/noLogin.gif" alt="Second slide">
+      </div>
+      <div class="carousel-item">
+        <h1>WEB SCRAPING</h1>
+        <p>Scrapes the data from E-commerce websites to get product at best price</p>
+        <img class="carousel-img" src="/media/scappinggif.gif" alt="Third slide">
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</section>
+<!--Footer section-->
+<section>
+  <div class="footer-div">
+   <p style="color:#FFD93D;">Copyright © 2023 PricePilot</p>
+  </div>
+</section>
+<script>
+    //get the card
+    var cardId=document.querySelectorAll("#card-id");
+    console.log(cardId);
+ //get the price tag
+   var priceTag=document.getElementById("price-tag");
+ //get the price tag class
+  var priceTagClass=document.querySelectorAll(".price-tag-class");
+ console.log(priceTagClass);
+    //Appear laodingGif
+    var temp=0;
+ function appearLoadingGif(){
+        temp=1;
+        loadingGif.style.display="block";
+ }
+  //Get the loading Gif
+  var loadingGif=document.getElementById("loadingGifid");
+
+  //Resize Observer
+const resize_ob = new ResizeObserver(function(entries) {
+	// since we are observing only a single element, so we access the first element in entries array
+	let rect = entries[0].contentRect;
+  
+	// current width & height
+	var height1 = rect.height;
+   if(height1>178)
+   { 
+     window.scrollTo(0,570);
+     loadingGif.style.display="none";
+ 
+   }
+        if(height1>178 && temp==1 )
+        {
+          loadingGif.style.display="block";
+        }
+  
+  
+       
+
+});
+
+// start observing for resize
+resize_ob.observe(searchProduct);
+
+
+ //code for hiding products which can't scrapped by website   
+  cardId.forEach(function(entry){
+     let temppriceTag=entry.querySelector("#price-tag");
+     if(temppriceTag.innerText==0)
+     {
+       entry.style.display="none";
+     }
+  })
+  // Get the modal
+  var modal = document.getElementById("myModal");
+  
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+  
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+  
+  // When the user clicks the button, open the modal 
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+  
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+  
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+  </script>
+{% endblock  %} 
